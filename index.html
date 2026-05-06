@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف: أبوبكر وشقاهات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #d4af37; --cream: #fcf9f5; --text: #4a4a4a; }
+        body, html { margin: 0; padding: 0; height: 100%; font-family: 'Montserrat', sans-serif; background: var(--cream); overflow-x: hidden; }
+        
+        /* Envelope Styles */
+        #envelope-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--cream); z-index: 1000; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: transform 1s ease-in-out, opacity 1s; }
+        .envelope { width: 300px; height: 200px; background: #fff; border: 1px solid #ddd; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .envelope::before { content: ""; position: absolute; top: 0; width: 0; height: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 100px solid #f3f3f3; z-index: 2; transition: 0.5s; }
+        .seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: var(--gold); border-radius: 50%; z-index: 3; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .open-env { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+
+        /* Invitation Content */
+        .invitation-container { opacity: 0; transition: opacity 2s ease; padding: 40px 20px; text-align: center; max-width: 500px; margin: auto; }
+        .visible { opacity: 1; }
+        .arabic-text { font-family: 'Amiri', serif; font-size: 1.4rem; color: var(--gold); margin-bottom: 20px; line-height: 1.8; }
+        .names { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--gold); margin: 20px 0; }
+        .divider { width: 60px; height: 2px; background: var(--gold); margin: 20px auto; }
+        .countdown { display: flex; justify-content: center; gap: 15px; margin: 30px 0; font-size: 0.8rem; color: var(--text); }
+        .countdown-item { display: flex; flex-direction: column; background: white; padding: 10px; border-radius: 8px; min-width: 50px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .countdown-item span { font-size: 1.2rem; font-weight: bold; color: var(--gold); }
+        .btn-map { background: var(--gold); color: white; padding: 15px 30px; text-decoration: none; border-radius: 30px; display: inline-block; margin-top: 20px; font-weight: 500; transition: 0.3s; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+    </style>
+</head>
+<body>
+
+    <div id="envelope-wrapper" onclick="openInvitation()">
+        <div class="envelope">
+            <div class="seal">OPEN</div>
+        </div>
+    </div>
+
+    <div class="invitation-container" id="content">
+        <div class="arabic-text">بِسْمِ ٱللهِ ٱلرَّحْمَٰنِ ٱلرَّحِيْمِ</div>
+        <div class="arabic-text" style="font-size: 1.1rem; color: #666;">
+            "وَمِنۡ اٰيٰتِهٖۤ اَنۡ خَلَقَ لَكُمۡ مِّنۡ اَنۡفُسِكُمۡ اَزۡوَاجًا لِّتَسۡكُنُوۡۤا اِلَيۡهَا وَجَعَلَ بَيۡنَكُمۡ مَّوَدَّةً وَّرَحۡمَةً"
+        </div>
+
+        <p style="letter-spacing: 2px; font-size: 0.8rem; margin-top: 30px;">TOGETHER WITH THEIR FAMILIES, WE INVITE YOU TO THE NIKAH OF</p>
+        
+        <div class="names">Aboobaker Siddiq Ibrahim<br>&<br>Shafahath Banu</div>
+        
+        <div class="divider"></div>
+
+        <p style="font-weight: 500;">SUNDAY, 05<sup>TH</sup> JULY 2026</p>
+        <p style="margin-top: -10px;">AT 11:30 AM</p>
+
+        <p style="margin: 30px 0 10px 0;"><strong>Halima Sabju Auditorium</strong><br>
+        Udyavara, Korangrapadi, Karnataka</p>
+
+        <div class="countdown" id="timer">
+            <div class="countdown-item"><span id="days">0</span>DAYS</div>
+            <div class="countdown-item"><span id="hours">0</span>HRS</div>
+            <div class="countdown-item"><span id="minutes">0</span>MIN</div>
+        </div>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=Halima+Sabju+Auditorium+Udyavara" target="_blank" class="btn-map">📍 VIEW ON GOOGLE MAPS</a>
+    </div>
+
+    <script>
+        function openInvitation() {
+            document.getElementById('envelope-wrapper').classList.add('open-env');
+            document.getElementById('content').classList.add('visible');
+        }
+
+        // Countdown Timer
+        const targetDate = new Date("July 5, 2026 11:30:00").getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        }, 1000);
+    </script>
+</body>
+</html>
